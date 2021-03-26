@@ -1,0 +1,33 @@
+icon: {{item.icon}}
+title: {{item.name}}
+path: {{item.name|lower}}
+badges: []
+panel: true
+cards:
+  - type: vertical-stack
+    cards:
+      - type: custom:layout-card
+        layout_type: "custom:vertical-layout"
+        cards:
+          - template: title_h2
+            type: "custom:decluttering-card"
+            variables:
+              - title: Ets a **{{item.name}}**
+
+          - !include 00_home/notificacions.yaml
+
+{% if item.columns|default(3) > 1 %}
+          - type: custom:layout-break
+{% endif %}
+
+{% include 'component_devices.yaml.j2' %}
+
+{% include 'component_sensors.yaml.j2' %}
+
+{% if item.columns|default(3) > 2 %}
+          - type: custom:layout-break
+{% endif %}
+
+{% include 'component_escenes.yaml.j2' %}
+
+{% include 'component_scripts.yaml.j2' %}

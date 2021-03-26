@@ -1,0 +1,36 @@
+{% if item.escenes|length > 0 %}
+          - template: title_h2
+            type: "custom:decluttering-card"
+            variables:
+              - title: Escenes
+
+          - type: "custom:vertical-stack-in-card"
+            style: |
+              ha-card {
+                margin-left: 5px;
+                margin-right: 5px;
+                padding-top: 10px;
+              }
+            cards:
+              - type: "custom:layout-card"
+                layout_type: "custom:horizontal-layout"
+                layout:
+                  max_cols: 5
+                  width: 90
+                  max_width: 90
+                # justify_content: left
+                style: |
+                  ha-card {
+                    padding: 10px;
+                  }
+                cards:
+{% for escena in item.escenes %}
+                  - template: nest_button_action
+                    type: "custom:decluttering-card"
+                    variables:
+                      # - title: Escena relax
+                      - service: scene.turn_on
+                      - entity_id: {{escena}}
+                      # - icon: "mdi:weather-sunny"
+{% endfor %}
+{% endif %}

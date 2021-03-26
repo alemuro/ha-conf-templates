@@ -1,0 +1,32 @@
+{% if item.sensor is defined %}
+          - template: title_h2
+            type: "custom:decluttering-card"
+            variables:
+              - title: Sensors
+
+          - type: horizontal-stack
+            cards:
+              - type: sensor
+                graph: line
+                entity: {{item.sensor}}_temperature
+                name: Temperatura
+
+              - type: sensor
+                graph: line
+                entity: {{item.sensor}}_humidity
+                name: Humitat
+{% endif %}
+
+{% if item.sensor is defined and item.climate is defined %}
+          - type: custom:mini-climate
+            entity: {{item.climate}}
+            name: Calefacció {{item.name}}
+            icon: "mdi:radiator"
+            secondary_info:
+              type: last-changed
+            toggle:
+              hide: true
+            temperature:
+              source:
+                entity: {{item.sensor}}_temperature
+{% endif %}

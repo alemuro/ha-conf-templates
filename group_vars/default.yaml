@@ -1,0 +1,106 @@
+ha_path: /usr/share/hassio/homeassistant
+
+ha_rooms:
+  - name: Menjador
+    columns: 3
+    icon: "mdi:sofa"
+    sensor: sensor.livingroom_sensor_1
+    climate: climate.menjador
+    devices:
+      - light.livingroom_light_1
+      - light.livingroom_light_2
+      - light.livingroom_light_3
+      - binary_sensor.livingroom_contact_1_contact
+      - media_player.tele
+      - media_player.xboxone
+      - switch.aspirador
+    escenes:
+      - scene.buenos_dias
+      - scene.cena
+      - scene.comida
+      - scene.con_amigos
+      - scene.juegos_de_mesa
+      - scene.relax
+      - scene.tele
+    scripts:
+      - script.tv_tv3
+      - script.tv_antena3
+      - script.tv_bemad
+      - script.tv_twitch
+      - script.tv_turn_on_youtube
+      - script.tv_turn_on_disney
+      - script.tv_turn_on_netflix
+      - script.tv_turn_on_prime
+      - script.tv_turn_on_switch
+      - script.tv_turn_on_wii
+      - script.tv_turn_on_xbox
+      - script.tv_turn_on_xbox_rocket_league
+
+  - name: Dormitori
+    columns: 1
+    icon: "mdi:bed"
+    sensor: sensor.bedroom_sensor_1
+    climate: climate.dormitori
+    devices:
+      - fan.xiaomi_miio_device
+      - binary_sensor.bedroom_contact_1_contact
+      - media_player.el_lado_oscuro
+    escenes: []
+    scripts: []
+
+  - name: Oficina
+    columns: 2
+    icon: "mdi:desktop-classic"
+    sensor: sensor.office_sensor_1
+    climate: climate.despatx
+    devices:
+      - light.office_light_2
+      - light.office_light_1
+      - binary_sensor.office_occupancy_1_occupancy
+      - media_player.cuina
+    escenes:
+      - scene.oficina_trabajo
+      - scene.oficina_juegos
+    scripts: []
+
+  - name: Entrada
+    columns: 1
+    icon: "mdi:door-open"
+    devices:
+      - light.entrance_light_1
+      - binary_sensor.entrance_contact_1_contact
+      - binary_sensor.entrance_occupancy_1_occupancy
+      - camera.escala
+    escenes: []
+    scripts: []
+
+  - name: Cuina
+    columns: 1
+    icon: "mdi:chef-hat"
+    devices:
+      - switch.kitchen_light_1
+      - switch.kitchen_switch_ricecooker
+      - binary_sensor.kitchen_occupancy_1_occupancy
+    escenes: []
+    scripts: []
+    devices_custom:
+      - type: entities
+        show_header_toggle: false
+        style: |
+          ha-card {
+            margin-right: 5px;
+          }
+        entities:
+          - entity: input_boolean.arrocera_enable
+            name: Programació arrocera
+            show_state: true
+            toggle: true
+            icon: "mdi:rice"
+            type: "custom:multiple-entity-row"
+            entities:
+              - entity: input_datetime.arrocera_schedule_start
+                name: "Inici"
+                state_color: true
+              - entity: input_datetime.arrocera_schedule_stop
+                name: "Final"
+                state_color: true

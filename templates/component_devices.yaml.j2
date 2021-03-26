@@ -1,0 +1,51 @@
+{% if item.devices|length > 0 %}
+          - template: title_h2
+            type: "custom:decluttering-card"
+            variables:
+              - title: Dispositius
+
+          - type: "custom:vertical-stack-in-card"
+            style: |
+              ha-card {
+                margin-left: 5px;
+                margin-right: 5px;
+                padding-top: 10px;
+              }
+            cards:
+              - type: "custom:layout-card"
+                layout_type: "custom:horizontal-layout"
+                layout:
+                  max_cols: 5
+                  width: 90
+                  max_width: 90
+                # justify_content: left
+                style: |
+                  ha-card {
+                    padding: 10px;
+                  }
+                cards:
+{% for device in item.devices %}
+{% if 'binary_sensor.' in device %}
+                  - template: nest_button_binary_sensor
+                    type: "custom:decluttering-card"
+                    variables:
+                      - entity: {{device}}
+{% elif 'media_player.' in device %}
+                  - template: nest_button_media_player
+                    type: "custom:decluttering-card"
+                    variables:
+                      - entity: {{device}}
+{% else %}
+                  - template: nest_button_light
+                    type: "custom:decluttering-card"
+                    variables:
+                      - entity: {{device}}
+{% endif %}
+{% endfor %}
+
+
+{% if item.devices_custom is defined %}
+              {{item.devices_custom | to_nice_yaml(indent=2) | indent(14)}}
+{% endif %}
+
+{% endif %}
