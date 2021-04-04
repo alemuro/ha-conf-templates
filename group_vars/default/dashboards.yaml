@@ -1,6 +1,6 @@
 ha_path: /usr/share/hassio/homeassistant
 
-ha_rooms:
+ha_dashboards:
   - name: Menjador
     columns: 3
     icon: "mdi:sofa"

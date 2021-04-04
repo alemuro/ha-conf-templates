@@ -4,4 +4,4 @@
       template:
         src: room_dashboard.yaml.j2
         dest: "{{ha_path}}/lovelace/views/room_dashboard_{{item.name | lower}}.yaml"
-      with_items: "{{ha_rooms}}"
+      with_items: "{{ha_dashboards}}"
