@@ -3,5 +3,11 @@
     - name: Generate room dashboard
       template:
         src: dashboard_room.yaml.j2
-        dest: "{{ha_path}}/lovelace/views/dashboard_room_{{item.name | lower}}.yaml"
+        dest: "{{ha_path}}/lovelace/views/dashboard_room_{{item.name | lower}}_ansible.yaml"
+      with_items: "{{ha_dashboards}}"
+
+    - name: Configure view.yaml
+      lineinfile:
+        line: "- !include views/dashboard_room_{{item.name | lower}}_ansible.yaml"
+        path: "{{ha_path}}/lovelace/views.yaml"
       with_items: "{{ha_dashboards}}"
