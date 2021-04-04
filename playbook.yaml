@@ -2,6 +2,6 @@
   tasks:
     - name: Generate room dashboard
       template:
-        src: room_dashboard.yaml.j2
-        dest: "{{ha_path}}/lovelace/views/room_dashboard_{{item.name | lower}}.yaml"
+        src: dashboard_room.yaml.j2
+        dest: "{{ha_path}}/lovelace/views/dashboard_room_{{item.name | lower}}.yaml"
       with_items: "{{ha_dashboards}}"

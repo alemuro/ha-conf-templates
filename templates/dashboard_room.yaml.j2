@@ -1,3 +1,7 @@
+###################
+# {{ ansible_managed }} #
+###################
+
 icon: {{item.icon}}
 title: {{item.name}}
 path: {{item.name|lower}}
@@ -20,14 +24,14 @@ cards:
           - type: custom:layout-break
 {% endif %}
 
-{% include 'component_devices.yaml.j2' %}
+{% include 'dashboard_component_devices.yaml.j2' %}
 
-{% include 'component_sensors.yaml.j2' %}
+{% include 'dashboard_component_sensors.yaml.j2' %}
 
 {% if item.columns|default(3) > 2 %}
           - type: custom:layout-break
 {% endif %}
 
-{% include 'component_escenes.yaml.j2' %}
+{% include 'dashboard_component_escenes.yaml.j2' %}
 
-{% include 'component_scripts.yaml.j2' %}
+{% include 'dashboard_component_scripts.yaml.j2' %}
